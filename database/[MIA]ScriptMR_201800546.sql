@@ -181,3 +181,44 @@ CREATE TABLE detalle_requisito
         ON DELETE CASCADE
 
 );
+
+CREATE TABLE chat 
+(
+    id_chat  NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    id_chat_usuario1 NUMBER,
+    id_chat_usuario2 NUMBER,
+
+    CONSTRAINT id_chat PRIMARY KEY (id_chat),
+
+    CONSTRAINT id_chat_usuario1
+        FOREIGN KEY (id_chat_usuario1)
+        REFERENCES usuario(id_usuario)
+        ON DELETE CASCADE,
+        
+    CONSTRAINT id_chat_usuario2
+        FOREIGN KEY (id_chat_usuario2)
+        REFERENCES usuario(id_usuario)
+        ON DELETE CASCADE
+
+);
+
+CREATE TABLE mensaje 
+(
+    id_mensaje  NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    id_mensaje_usuario NUMBER,
+    id_mensaje_chat NUMBER,
+    texto VARCHAR(200) NOT NULL,
+    hora DATE,
+    CONSTRAINT id_mensaje PRIMARY KEY (id_mensaje),
+
+    CONSTRAINT id_mensaje_usuario
+        FOREIGN KEY (id_mensaje_usuario)
+        REFERENCES usuario(id_usuario)
+        ON DELETE CASCADE,
+        
+    CONSTRAINT id_mensaje_chat
+        FOREIGN KEY (id_mensaje_chat)
+        REFERENCES chat(id_chat)
+        ON DELETE CASCADE
+
+);
