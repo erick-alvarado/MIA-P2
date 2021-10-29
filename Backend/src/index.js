@@ -17,6 +17,13 @@ const config = {
   baseURL: process.env.AUTH_BASE_URL,
   clientID: process.env.AUTH_CLIENT_ID,
   issuerBaseURL:  process.env.AUTH_ISSUER
+  /*clientSecret:process.env.AUTH_CLIENT_SECRET,
+
+  authorizationParams: {
+    response_type: 'code',
+    audience: process.env.AUTH_ISSUER,
+    scope: 'openid profile email offline_access read:products',
+  }*/
 };
 
 
