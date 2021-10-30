@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useAuth0 } from '@auth0/auth0-react';
+import NavBar from './components/NavBar';
+import React from 'react';
+import {BrowserRouter as Router, Route,Redirect,Switch} from 'react-router-dom';
+import CargaMasiva from './pages/administrator/CargaMasiva';
 
-function App() {
+function App(){
+  const{isLoading} = useAuth0();
+  if(isLoading){
+    return <div>Loading...</div>
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <NavBar/>
+      <main>
+        <Switch>
+          <Route path="/CargaMasiva">
+              <CargaMasiva/>
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </main>
+    </Router>
   );
 }
-
 export default App;
