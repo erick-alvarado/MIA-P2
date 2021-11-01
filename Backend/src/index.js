@@ -8,6 +8,8 @@ const cors = require('cors')
 const app = express();
 const loadenv = require('dotenv').config()
 const loginRouter = require('../routes/login.js')
+const databaseRouter = require('../routes/database')
+
 
 
 const config = {
@@ -46,6 +48,8 @@ app.get('/profile', requiresAuth(), (req, res) => {
   console.log(req.oidc.user)
   res.send(JSON.stringify(req.oidc.user));
 });
+
+app.use("/database",databaseRouter);
 
 app.listen(app.get('port'), () => {
     console.log(`Server on port ${app.get("port")}`);
