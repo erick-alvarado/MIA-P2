@@ -21,7 +21,20 @@ async function departamento(id_padre,dep){
             nombre = '${dep.nombre}' 
         ))`;
     let res = await execute(sql)
-
+    if(dep.departamentos){
+        let json_= dep.departamentos.departamento;
+        let sql = `select id_departamento from departamento where nombre = '${dep.nombre}'`
+        let res = await execute(sql)
+        let id_dep_aux = res.rows[0][0]
+        if(json_.nombre){
+            await departamento(id_dep_aux,json_)
+        }
+        else{
+            for(var k in json_) {
+                await departamento(id_dep_aux,json_[k])
+             }
+        }
+    }
     if(dep.puestos){
         let json_= dep.puestos.puesto;
         let sql = `select id_departamento from departamento where nombre = '${dep.nombre}'`
