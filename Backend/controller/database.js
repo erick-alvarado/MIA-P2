@@ -84,9 +84,44 @@ async function requisito(id_puesto,requ){
             nombre = '${requ.nombre}' and
             id_requisito_puesto = ${id_puesto}
         ))`;
+    let res = await execute(sql)
+    sql = `select id_requisito from requisito where nombre = '${requ.nombre}' and id_requisito_puesto = ${id_puesto}`
+    res = await execute(sql)
+    let id_requisito_aux = res.rows[0][0]
+
+    if(requ.formatos){
+        let json_= requ.formatos.formato;
+        if(json_.nombre){
+            await formato(id_requisito_aux,json_)
+        }
+        else{
+            for(var k in json_) {
+                await formato(id_requisito_aux,json_[k])
+            }
+        }
+    }
+
+}
+async function formato(id_requisito,format){
+    let sql = `insert into formato(nombre) select '${format.nombre}' from dual
+    where not exists(select * from formato where (
+        nombre = '${format.nombre}' 
+    ))`;
     console.log(sql)
     let res = await execute(sql)
-
+    sql = `select id_formato from formato where nombre = '${format.nombre}'`
+    res = await execute(sql)
+    let id_formato = res.rows[0][0]
+    console.log(id_formato)
+    console.log(id_requisito)
+    sql = `insert into detalle_formato(id_detalle_formato_requisito,id_detalle_formato_formato) 
+    select ${id_requisito},${id_formato} from dual
+        where not exists(select * from detalle_formato where (
+            id_detalle_formato_requisito = ${id_requisito}  and
+            id_detalle_formato_formato =  ${id_formato}
+        ))`;
+    console.log(sql)
+    res = await execute(sql)
 }
 async function categoria(id_puesto, cat){
     let sql = `insert into categoria(nombre) select '${cat.nombre}' from dual
