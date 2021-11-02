@@ -90,60 +90,7 @@
 				</requisitos>
 			</puesto>
 		</puestos>
-		<departamentos>
-			<departamento>
-				<nombre> musical group </nombre>
-				<capital_total> 100000 </capital_total>
-				<puestos>
-					<puesto>
-						<nombre> Rapper </nombre>
-						<salario> 59999 </salario>
-						<imagen>
-							https://alternative-storage.s3.us-east-2.amazonaws.com/rapper.jpg
-						</imagen>
-						<categorias>
-							<categoria>
-								<nombre> musica </nombre>
-							</categoria>
-							<categoria>
-								<nombre> fama </nombre>
-							</categoria>
-							<categoria>
-								<nombre> cool </nombre>
-							</categoria>
-						</categorias>
-						<requisitos>
-							<requisito>
-								<nombre> Certificado de lectura </nombre>
-								<formatos> 
-									<formato>
-										<nombre> pdf </nombre>
-									</formato>
-								</formatos>
-								<tamaño>5</tamaño>
-								<obligatorio>0</obligatorio>
-							</requisito>
-							<requisito>
-								<nombre> Video de audicion, 4 versos a eleccion </nombre>
-								<formatos> 
-									<formato>
-										<nombre> mp4 </nombre>
-									</formato>
-									<formato>
-										<nombre> mkv </nombre>
-									</formato>
-									<formato>
-										<nombre> wmv </nombre>
-									</formato>
-								</formatos>
-								<tamaño>100</tamaño>
-								<obligatorio>1</obligatorio>
-							</requisito>
-						</requisitos>
-					</puesto>
-				</puestos>
-			</departamento>
-		</departamentos>
+		
 	</departamento>
 	<departamento>
 		<nombre> Desarrollo </nombre>
@@ -178,4 +125,56 @@
 			</puesto>
 		</puestos>
 	</departamento>
+	<departamento>
+			<nombre> musical group </nombre>
+			<capital_total> 100000 </capital_total>
+			<puestos>
+				<puesto>
+					<nombre> Rapper </nombre>
+					<salario> 59999 </salario>
+					<imagen>
+						https://alternative-storage.s3.us-east-2.amazonaws.com/rapper.jpg
+					</imagen>
+					<categorias>
+						<categoria>
+							<nombre> musica </nombre>
+						</categoria>
+						<categoria>
+							<nombre> fama </nombre>
+						</categoria>
+						<categoria>
+							<nombre> cool </nombre>
+						</categoria>
+					</categorias>
+					<requisitos>
+						<requisito>
+							<nombre> Certificado de lectura </nombre>
+							<formatos> 
+								<formato>
+									<nombre> pdf </nombre>
+								</formato>
+							</formatos>
+							<tamaño>5</tamaño>
+							<obligatorio>0</obligatorio>
+						</requisito>
+						<requisito>
+							<nombre> Video de audicion, 4 versos a eleccion </nombre>
+							<formatos> 
+								<formato>
+									<nombre> mp4 </nombre>
+								</formato>
+								<formato>
+									<nombre> mkv </nombre>
+								</formato>
+								<formato>
+									<nombre> wmv </nombre>
+								</formato>
+							</formatos>
+							<tamaño>100</tamaño>
+							<obligatorio>1</obligatorio>
+						</requisito>
+					</requisitos>
+				</puesto>
+			</puestos>
+			</departamento>
 </departamentos>

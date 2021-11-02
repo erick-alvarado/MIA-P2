@@ -2,7 +2,7 @@ const db_ = require('../config/config');
 
 exports.LogIn = async(req,res)=>{
     sql = "select * from usuario where usuario != 'admin'"
-    let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
+    let result = await db_.Open(sql,[],{ autoCommit: true }).catch((e) => { console.error(e); return 'error!'})
     console.log(result.rows);
     const users =[]
     

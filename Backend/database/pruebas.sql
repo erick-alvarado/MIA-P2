@@ -29,3 +29,12 @@ insert into detalle_requisito(id_detalle_requisito_solicitud, id_detalle_requisi
 insert into chat (id_chat_usuario1, id_chat_usuario2) values (1,2)
 insert into mensaje(id_mensaje_usuario,id_mensaje_chat,texto,hora) values (1,1,'Mensaje 1', sysdate)
 insert into mensaje(id_mensaje_usuario,id_mensaje_chat,texto,hora) values (2,1,'Respuesta 1', sysdate)
+
+
+
+
+insert into destination select 'id', 'xyz' from dual 
+where not exists (select id from destination where id = 'id')
+
+insert into OPT (email, campaign_id)  select 'mom@cox.net',100 from dual
+where not exists(select * from OPT  where (email ='mom@cox.net' and campaign_id =100));
