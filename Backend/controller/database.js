@@ -50,24 +50,41 @@ async function puesto(id_dep, puesto){
         ))`;
     let res = await execute(sql)
 
+    sql = `select id_puesto from puesto where nombre = '${puesto.nombre}' and id_puesto_departamento = ${id_dep}`
+    res = await execute(sql)
+    let id_puesto_aux = res.rows[0][0]
+    
     if(puesto.categorias){
         let json_= puesto.categorias.categoria;
         if(json_.nombre){
-            await categoria(json_)
+            await categoria(id_puesto_aux,json_)
         }
         else{
             for(var k in json_) {
-                await categoria(json_[k])
+                await categoria(id_puesto_aux,json_[k])
             }
         }
     }
 }
-async function categoria(cat){
+async function categoria(id_puesto, cat){
     let sql = `insert into categoria(nombre) select '${cat.nombre}' from dual
         where not exists(select * from categoria where (
             nombre = '${cat.nombre}' 
         ))`;
     let res = await execute(sql)
+    sql = `select id_categoria from categoria where nombre = '${cat.nombre}'`
+    res = await execute(sql)
+    let id_categoria = res.rows[0][0]
+
+
+    sql = `insert into detalle_categoria(id_detalle_categoria_categoria,id_detalle_categoria_puesto) 
+    select ${id_categoria},${id_puesto} from dual
+        where not exists(select * from detalle_categoria where (
+            id_detalle_categoria_categoria = ${id_categoria}  and
+            id_detalle_categoria_puesto =  ${id_puesto}
+        ))`;
+    console.log(sql)
+    res = await execute(sql)
 }
 async function execute(query){
     let result = await db_.Open(query,[],true).catch((e) => { console.error(e);})
