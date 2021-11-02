@@ -120,20 +120,16 @@ async function formato(id_requisito,format){
     where not exists(select * from formato where (
         nombre = '${format.nombre}' 
     ))`;
-    console.log(sql)
     let res = await execute(sql)
     sql = `select id_formato from formato where nombre = '${format.nombre}'`
     res = await execute(sql)
     let id_formato = res.rows[0][0]
-    console.log(id_formato)
-    console.log(id_requisito)
     sql = `insert into detalle_formato(id_detalle_formato_requisito,id_detalle_formato_formato) 
     select ${id_requisito},${id_formato} from dual
         where not exists(select * from detalle_formato where (
             id_detalle_formato_requisito = ${id_requisito}  and
             id_detalle_formato_formato =  ${id_formato}
         ))`;
-    console.log(sql)
     res = await execute(sql)
 }
 async function categoria(id_puesto, cat){

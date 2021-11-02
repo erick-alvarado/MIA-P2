@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input } from 'reactstrap';
+import { Input,Button,FormGroup,Label } from 'reactstrap';
 import axios from 'axios';
 const urlServer = `http://localhost:3001`;
 
@@ -31,36 +31,62 @@ const options = {
   alwaysCreateTextNode: false
 };
 
-
-
-
 class CargarArchivo extends Component {
 
-  showFile = async (e) => {
+  constructor(props){
+    super(props);
+    this.state = {
+      data: {}
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  
+  handleChange(event) 
+  {    
+    this.setState({value: event.target.value});  
+  }
+  showFile = (e) => {
     e.preventDefault()
     const reader = new FileReader()
     reader.onload = async (e) => { 
       const text = (e.target.result)
       let jsonObj = parser.parse(text,options, true);
       console.log(JSON.stringify(jsonObj))
-      alert(JSON.stringify(jsonObj))
       console.log(jsonObj)
-      await axios.post(urlServer+`/database/cargaMasiva`, jsonObj )
-        .then(response=>{
-            alert(JSON.stringify(response.data));
-        })
-        .catch(error=>{
-            alert(error);
-        })
-
-
+      this.setState({data:jsonObj})
     };
     reader.readAsText(e.target.files[0])
   }
 
+  readFile= async ()=>{
+    alert(JSON.stringify(this.state.data))
+    await axios.post(urlServer+`/database/cargaMasiva`, this.state.data )
+    .then(response=>{
+        alert(JSON.stringify(response.data));
+    })
+    .catch(error=>{
+        alert(error);
+    })
+  }
   render = () => {
     return (
-      <Input type="file" onChange={(e) => this.showFile(e)} />
+      <FormGroup>
+        <Input type="file" onChange={(e) => this.showFile(e)} />
+        <Label for="exampleText">
+          Archivo cargado
+        </Label>
+        <Input
+          id="exampleText"
+          name="text"
+          type="textarea"
+          value = {JSON.stringify(this.state.data)}
+          onChange = {this.handleChange}
+          style = {{height:"500px"}}
+        />
+        <Button outline onClick={() => { this.readFile(); }}> Enviar </Button>
+
+      </FormGroup>
+
     )
   }
 }
