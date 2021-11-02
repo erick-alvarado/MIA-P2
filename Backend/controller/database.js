@@ -65,6 +65,28 @@ async function puesto(id_dep, puesto){
             }
         }
     }
+    if(puesto.requisitos){
+        let json_= puesto.requisitos.requisito;
+        if(json_.nombre){
+            await requisito(id_puesto_aux,json_)
+        }
+        else{
+            for(var k in json_) {
+                await requisito(id_puesto_aux,json_[k])
+            }
+        }
+    }
+}
+async function requisito(id_puesto,requ){
+    let sql = `insert into requisito(id_requisito_puesto,nombre,tamano,obligatorio) 
+        select ${id_puesto},'${requ.nombre}',${requ.tamaño},${requ.obligatorio} from dual
+        where not exists(select * from requisito where (
+            nombre = '${requ.nombre}' and
+            id_requisito_puesto = ${id_puesto}
+        ))`;
+    console.log(sql)
+    let res = await execute(sql)
+
 }
 async function categoria(id_puesto, cat){
     let sql = `insert into categoria(nombre) select '${cat.nombre}' from dual
@@ -83,7 +105,6 @@ async function categoria(id_puesto, cat){
             id_detalle_categoria_categoria = ${id_categoria}  and
             id_detalle_categoria_puesto =  ${id_puesto}
         ))`;
-    console.log(sql)
     res = await execute(sql)
 }
 async function execute(query){

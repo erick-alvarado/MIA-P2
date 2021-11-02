@@ -81,7 +81,9 @@ CREATE TABLE requisito
 (
     id_requisito  NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     id_requisito_puesto NUMBER,
-    nombre VARCHAR(50) NOT NULL,
+    nombre VARCHAR(500) NOT NULL,
+    tamano NUMBER,
+    obligatorio NUMBER,
 
     CONSTRAINT id_requisito PRIMARY KEY (id_requisito),
 
