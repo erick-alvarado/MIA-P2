@@ -123,6 +123,7 @@ CREATE TABLE usuario
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE,
     rol VARCHAR(30) NOT NULL,
+    estado NUMBER,
 
     CONSTRAINT id_usuario PRIMARY KEY (id_usuario),
 

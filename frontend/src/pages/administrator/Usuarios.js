@@ -66,6 +66,17 @@ class Usuarios extends Component {
       }
     })
   }
+  eliminarUsuario = async (usuario) =>{
+    await axios.post(urlServer + `/usuario/delete`,{
+      id_usuario: usuario.id
+    })
+    .then(response => {
+      alert(JSON.stringify(response.data))
+    })
+    .catch(error => {
+        alert(error);
+    })
+  }
   obtenerUsuarios = async() =>{
     await axios.get(urlServer + `/usuario`)
     .then(response => {
@@ -162,7 +173,8 @@ class Usuarios extends Component {
                       {v.rol}
                     </td>
                     <td>
-                      Control
+                      <Button outline color='danger' onClick={() => this.eliminarUsuario(v)}>Eliminar</Button>
+
                     </td>
                   </tr>
                 )

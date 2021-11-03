@@ -38,7 +38,7 @@ insert into OPT (email, campaign_id)  select 'mom@cox.net',100 from dual
 where not exists(select * from OPT  where (email ='mom@cox.net' and campaign_id =100));
 
 
-insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (null,'administrador','123',CURRENT_TIMESTAMP,'administrador')
-insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'coordinador','123',CURRENT_TIMESTAMP,'coordinador')
-insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'reclutador','123',CURRENT_TIMESTAMP,'reclutador')
-insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'usuario','123',CURRENT_TIMESTAMP,'usuario')
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol,estado) values (null,'administrador','123',CURRENT_TIMESTAMP,'administrador',1);
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol,estado) values (1,'coordinador','123',CURRENT_TIMESTAMP,'coordinador',1);
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol,estado) values (1,'reclutador','123',CURRENT_TIMESTAMP,'reclutador',1);
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol,estado) values (1,'usuario','123',CURRENT_TIMESTAMP,'usuario',1);
