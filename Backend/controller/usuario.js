@@ -37,3 +37,16 @@ exports.deleteUsuario = async(req,res)=>{
     let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
     res.status(200).json({message:'Usuario eliminado'});
 }
+exports.updateUsuario = async(req,res)=>{
+    const{usuario,contrasena,departamento,rol,id_usuario} = req.body;
+
+    sql = `update usuario set 
+            id_usuario_departamento = (SELECT id_departamento from departamento where nombre = '${departamento}'),
+            usuario = '${usuario}',
+            contrasena = '${contrasena}',
+            rol = '${rol}'
+        where id_usuario = ${id_usuario}`
+    console.log(sql)
+    let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+    res.status(200).json({message:'Usuario modificado'});
+}

@@ -33,7 +33,6 @@ class Usuarios extends Component {
   }
   componentDidMount = async () => {
     this.load();
-    this.obtenerUsuarios();
   }
   load = async () => {
     await axios.get(urlServer + `/departamento`)
@@ -43,6 +42,8 @@ class Usuarios extends Component {
         .catch(error => {
             alert(error);
         })
+    this.obtenerUsuarios();
+    
   }
   crearUsuario = async () => {
     console.log('creando Usuario')
@@ -54,23 +55,35 @@ class Usuarios extends Component {
           rol: this.state.form.rol
         })
         .then(response => {
+            this.load();
             alert(JSON.stringify(response.data))
         })
         .catch(error => {
             alert(error);
         })
-    this.setState({
-      form: {
-        usuario: '',
-        contrasena: ''
-      }
-    })
   }
   eliminarUsuario = async (usuario) =>{
     await axios.post(urlServer + `/usuario/delete`,{
       id_usuario: usuario.id
     })
     .then(response => {
+      this.load();
+      alert(JSON.stringify(response.data))
+    })
+    .catch(error => {
+        alert(error);
+    })
+  }
+  modificarUsuario = async (usuario) =>{
+    await axios.post(urlServer + `/usuario/update`,{
+      id_usuario: usuario.id,
+      usuario: this.state.form.usuario,
+      contrasena: this.state.form.contrasena,
+      departamento: this.state.form.departamento,
+      rol: this.state.form.rol
+    })
+    .then(response => {
+      this.load();
       alert(JSON.stringify(response.data))
     })
     .catch(error => {
@@ -173,8 +186,8 @@ class Usuarios extends Component {
                       {v.rol}
                     </td>
                     <td>
+                      <Button outline color='warning' onClick={() => this.modificarUsuario(v)}>Modificar</Button>
                       <Button outline color='danger' onClick={() => this.eliminarUsuario(v)}>Eliminar</Button>
-
                     </td>
                   </tr>
                 )
