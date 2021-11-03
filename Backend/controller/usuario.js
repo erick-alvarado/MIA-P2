@@ -1,17 +1,24 @@
 const db_ = require('../config/config');
 
 exports.getUsuarios = async(req,res)=>{
-    sql = "select * from usuario "
+    sql = `select u.id_usuario,p.nombre,u.usuario,u.contrasena,u.fecha_inicio,u.fecha_fin,u.rol from usuario u
+    inner join departamento p ON p.id_departamento = u.id_usuario_departamento`
     let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
-    let deps =[]
-    deps = result.rows.map(user=> {
-        let depSchema = {
-            "id_departamento": user[0],
-            "nombre": user[1]
+    let users =[]
+    users = result.rows.map(user=> {
+        let userSchema = {
+            "id": user[0],
+            "departamento": user[1],
+            "usuario": user[2],
+            "contrasena": user[3],
+            "fecha_inicio": user[4],
+            "fecha_fin": user[5],
+            "rol": user[6]
+
         }
-        return(depSchema)
+        return(userSchema)
     });
-    res.status(200).json(deps);
+    res.status(200).json(users);
 }
 exports.postUsuario = async(req,res)=>{
     const{usuario,contrasena,departamento,rol} = req.body;

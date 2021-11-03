@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Input,Label,Col,Button } from 'reactstrap';
+import { Form, FormGroup, Input,Label,Col,Button,Table } from 'reactstrap';
 import axios from 'axios';
 //const urlServer = `http://localhost:3001`;
 
@@ -10,7 +10,7 @@ class Usuarios extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        users: {},
+        users: [],
         deps: [],
         form: {
           usuario: '',
@@ -33,6 +33,7 @@ class Usuarios extends Component {
   }
   componentDidMount = async () => {
     this.load();
+    this.obtenerUsuarios();
   }
   load = async () => {
     await axios.get(urlServer + `/departamento`)
@@ -58,9 +59,25 @@ class Usuarios extends Component {
         .catch(error => {
             alert(error);
         })
+    this.setState({
+      form: {
+        usuario: '',
+        contrasena: ''
+      }
+    })
+  }
+  obtenerUsuarios = async() =>{
+    await axios.get(urlServer + `/usuario`)
+    .then(response => {
+        this.setState({ users: response.data });
+    })
+    .catch(error => {
+        alert(error);
+    })
   }
   render = () => {
     return (
+      <div>
       <Form>
         <FormGroup row>
           <Label sm={1}>Usuario</Label>
@@ -105,6 +122,56 @@ class Usuarios extends Component {
         </FormGroup>
         <Button variant="primary" onClick={() => this.crearUsuario()}>Crear</Button>
       </Form>
+        <Table hover responsive>
+          <thead>
+
+          <tr>
+            <th>#</th>
+            <th>Departamento</th>
+            <th>Usuario</th>
+            <th>Contrasena</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
+            <th>Rol</th>
+            <th>Control</th>
+          </tr>
+          </thead>
+          <tbody>
+            {this.state.users.map(v => {
+                return (
+                  <tr>
+                    <th scope="row">
+                      {v.id}
+                    </th>
+                    <td>
+                      {v.departamento}
+                    </td>
+                    <td>
+                      {v.usuario}
+                    </td>
+                    <td>
+                      {v.contrasena}
+                    </td>
+                    <td>
+                      {v.fecha_inicio}
+                    </td>
+                    <td>
+                      {v.fecha_fin}
+                    </td>
+                    <td>
+                      {v.rol}
+                    </td>
+                    <td>
+                      Control
+                    </td>
+                  </tr>
+                )
+              })}
+          </tbody>
+        </Table>
+      
+      </div>
+
     )
   }
 }
