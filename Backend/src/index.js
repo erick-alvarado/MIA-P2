@@ -9,6 +9,9 @@ const app = express();
 const loadenv = require('dotenv').config()
 const loginRouter = require('../routes/login.js')
 const databaseRouter = require('../routes/database')
+const departamentoRouter = require('../routes/departamento')
+const usuarioRouter = require('../routes/usuario')
+
 
 
 
@@ -50,6 +53,10 @@ app.get('/profile', requiresAuth(), (req, res) => {
 });
 
 app.use("/database",databaseRouter);
+app.use("/departamento",departamentoRouter);
+app.use("/usuario",usuarioRouter);
+
+
 
 app.listen(app.get('port'), () => {
     console.log(`Server on port ${app.get("port")}`);

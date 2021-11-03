@@ -21,8 +21,6 @@ insert into detalle_categoria (id_detalle_categoria_categoria ,id_detalle_catego
 insert into requisito(id_requisito_puesto, nombre) values (1,'requisito1')
 insert into formato (nombre) values('pdf')
 insert into detalle_formato ( id_detalle_formato_requisito,id_detalle_formato_formato) values ( 1,2)
-insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'admin','admin',CURRENT_TIMESTAMP,'admin')
-insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'user','user',CURRENT_TIMESTAMP,'user')
 insert into expediente ( dpi, nombres,apellidos,correo,direccion,telefono,url_cv) values ( 283182741010, 'Erick alv' ,'ostias','CorreoEjemplo@gmail.com','dir',23124543,'url_cv')
 insert into solicitud (id_solicitud_puesto, id_solicitud_expediente,estado) values (1,1,'estado1')
 insert into detalle_requisito(id_detalle_requisito_solicitud, id_detalle_requisito_requisito, url_, estado) values (1,1, 'url2' , 'denegado')
@@ -38,3 +36,9 @@ where not exists (select id from destination where id = 'id')
 
 insert into OPT (email, campaign_id)  select 'mom@cox.net',100 from dual
 where not exists(select * from OPT  where (email ='mom@cox.net' and campaign_id =100));
+
+
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (null,'administrador','123',CURRENT_TIMESTAMP,'administrador')
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'coordinador','123',CURRENT_TIMESTAMP,'coordinador')
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'reclutador','123',CURRENT_TIMESTAMP,'reclutador')
+insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol) values (1,'usuario','123',CURRENT_TIMESTAMP,'usuario')

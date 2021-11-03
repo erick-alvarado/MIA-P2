@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import React from 'react';
 import {BrowserRouter as Router, Route,Redirect,Switch} from 'react-router-dom';
 import CargaMasiva from './pages/administrator/CargaMasiva';
+import Usuarios from './pages/administrator/Usuarios';
 //npm start
 
 function App(){
@@ -15,10 +16,15 @@ function App(){
       <NavBar/>
       <main>
         <Switch>
-          {isAuthenticated && user.nickname ==='administrador'
-            && <Route path="/CargaMasiva">
-              <CargaMasiva/>
-            </Route>
+          {isAuthenticated && user.nickname === 'administrador' &&
+            <>
+              <Route path="/CargaMasiva">
+                <CargaMasiva />
+              </Route>
+              <Route path="/Usuarios">
+                <Usuarios />
+              </Route>
+            </>
           }
           <Redirect to="/" />
         </Switch>

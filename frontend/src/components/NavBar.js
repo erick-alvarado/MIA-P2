@@ -17,6 +17,7 @@ const NavBar = () => {
                     {isAuthenticated && user.nickname === 'administrador' && 
                         <Nav className="me-auto" navbar>
                             <NavLink href="/CargaMasiva">Carga Masiva </NavLink> 
+                            <NavLink href="/Usuarios">Usuarios </NavLink> 
                         </Nav>
                     }
                 </Nav>
