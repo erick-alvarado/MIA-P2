@@ -20,6 +20,11 @@ const NavBar = () => {
                             <NavLink href="/Usuarios">Usuarios </NavLink> 
                         </Nav>
                     }
+                    {!isAuthenticated &&
+                        <Nav className="me-auto" navbar>
+                            <NavLink href="/Principal">Principal </NavLink> 
+                        </Nav>
+                    }
                 </Nav>
                 {!isAuthenticated && <LoginButton />}
                 {isAuthenticated && <LogOutButton />}

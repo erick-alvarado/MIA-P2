@@ -55,8 +55,8 @@ async function puesto(id_dep, puesto){
     if(puesto.imagen){
         imagen = `'${puesto.imagen}'`
     }
-    let sql = `insert into puesto(id_puesto_departamento, nombre,salario,calificacion,url_imagen) 
-        select ${id_dep}, '${puesto.nombre}',${puesto.salario},0,${imagen} from dual
+    let sql = `insert into puesto(id_puesto_departamento, nombre,salario,calificacion,url_imagen,votos) 
+        select ${id_dep}, '${puesto.nombre}',${puesto.salario},0,${imagen},0 from dual
         where not exists(select * from puesto where (
             nombre = '${puesto.nombre}' and
             id_puesto_departamento = ${id_dep}

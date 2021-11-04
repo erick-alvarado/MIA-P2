@@ -47,6 +47,8 @@ CREATE TABLE puesto
     salario NUMBER NOT NULL,
     calificacion NUMBER NOT NULL,
     url_imagen VARCHAR(200),
+    votos NUMBER NOT NULL,
+
 
     CONSTRAINT id_puesto PRIMARY KEY (id_puesto),
 

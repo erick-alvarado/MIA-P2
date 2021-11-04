@@ -4,6 +4,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route,Redirect,Switch} from 'react-router-dom';
 import CargaMasiva from './pages/administrator/CargaMasiva';
 import Usuarios from './pages/administrator/Usuarios';
+import Principal from './pages/guest/Principal';
 //npm start
 
 function App(){
@@ -23,6 +24,13 @@ function App(){
               </Route>
               <Route path="/Usuarios">
                 <Usuarios />
+              </Route>
+            </>
+          }
+          {!isAuthenticated &&
+            <>
+              <Route path="/Principal">
+                <Principal />
               </Route>
             </>
           }

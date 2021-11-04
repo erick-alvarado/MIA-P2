@@ -15,7 +15,7 @@ select id_mensaje, id_mensaje_usuario,id_mensaje_chat,texto, to_char(hora,'yyyy/
 
 
 insert into departamento(nombre,capital) values('nom1',234)
-insert into puesto (id_puesto_departamento, nombre,salario,calificacion,url_imagen) values (1, 'puesto',4000,5,'urlejemplo')
+insert into puesto (id_puesto_departamento, nombre,salario,calificacion,url_imagen) values (1, 'puesto',4000,5,'urlejemplo',0)
 insert into categoria (nombre) values ('categoria1')
 insert into detalle_categoria (id_detalle_categoria_categoria ,id_detalle_categoria_puesto) values (1,1)
 insert into requisito(id_requisito_puesto, nombre) values (1,'requisito1')

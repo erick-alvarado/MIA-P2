@@ -11,7 +11,7 @@ const loginRouter = require('../routes/login.js')
 const databaseRouter = require('../routes/database')
 const departamentoRouter = require('../routes/departamento')
 const usuarioRouter = require('../routes/usuario')
-
+const puestoRouter = require('../routes/puesto')
 
 
 
@@ -55,6 +55,8 @@ app.get('/profile', requiresAuth(), (req, res) => {
 app.use("/database",databaseRouter);
 app.use("/departamento",departamentoRouter);
 app.use("/usuario",usuarioRouter);
+app.use("/puesto",puestoRouter);
+
 
 
 

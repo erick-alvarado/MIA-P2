@@ -83,7 +83,7 @@ class Usuarios extends Component {
       rol: this.state.form.rol
     })
     .then(response => {
-      this.load();
+      this.load()
       alert(JSON.stringify(response.data))
     })
     .catch(error => {
