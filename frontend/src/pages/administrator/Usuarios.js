@@ -163,7 +163,7 @@ class Usuarios extends Component {
           <tbody>
             {this.state.users.map(v => {
                 return (
-                  <tr>
+                  <tr key = {v.id}>
                     <th scope="row">
                       {v.id}
                     </th>

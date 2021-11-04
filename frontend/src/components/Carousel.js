@@ -24,7 +24,6 @@ class Car extends React.Component {
         }));
     }
     componentDidMount = async () => {
-        console.log(items)
         this.load();
     }
     load = async () => {
@@ -52,7 +51,6 @@ class Car extends React.Component {
                     }
                     return itemSchema;
                 });
-                console.log(response.data);
                 this.state.mounted=true;
             })
             .catch(error => {

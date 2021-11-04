@@ -1,5 +1,11 @@
 const db_ = require('../config/config');
-
+exports.setEstrellas = async(req,res)=>{
+    const{id_puesto,estrellas} = req.body;
+    sql = `update puesto set calificacion = calificacion +${estrellas} , votos = votos +1 where id_puesto = ${id_puesto}`
+    console.log(sql)
+    let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+    res.status(200).json({message:'Calificacion realizada!'});
+}
 exports.getPuestos = async(req,res)=>{
     sql = `select * from puesto`
     let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
