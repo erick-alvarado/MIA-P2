@@ -7,7 +7,14 @@ exports.setEstrellas = async(req,res)=>{
     res.status(200).json({message:'Calificacion realizada!'});
 }
 exports.getPuestos = async(req,res)=>{
-    sql = `select * from puesto`
+    sql = `select * from puesto p`
+    if(req.params.search){
+        sql+=` where 
+        p.nombre like '%${req.params.search}%' collate binary_ci OR
+        p.nombre like '${req.params.search}%' collate binary_ci OR
+        p.nombre like '%${req.params.search}' collate binary_ci`
+        console.log(sql)
+    }
     let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
     let puestos =[]
     puestos = await Promise.all(result.rows.map(async(user)=> {

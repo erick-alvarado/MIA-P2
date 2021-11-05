@@ -3,6 +3,8 @@ const router = Router();
 const puestoController = require('../controller/puesto')
 
 router.get("/",puestoController.getPuestos)
+router.get("/:search",puestoController.getPuestos)
+
 router.post("/estrellas",puestoController.setEstrellas)
 
 

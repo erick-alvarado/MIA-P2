@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Button,Table} from 'reactstrap'
+import {Button,Table,Input,InputGroup} from 'reactstrap'
 import { Rating } from 'react-simple-star-rating'
 import Car from '../../components/Carousel';
 //const urlServer = `http://localhost:3001`;
@@ -13,19 +13,15 @@ class Principal extends Component {
     super(props);
       this.state = {
         puestos: [],
-        rate:0
+        rate:0,
+        search: ''
       }
       this.handleChange = this.handleChange.bind(this)
   }
-
-  handleChange = async e => {
-    await this.setState({
-        form: {
-            ...this.state.form,
-            [e.target.name]: e.target.value
-        }
-    });
-    console.log(this.state.form);
+  
+  handleChange = async e => 
+  {    
+    await this.setState({[e.target.name]: e.target.value});  
   }
   setEstrella = async (data) =>{
     this.state.rate= data
@@ -49,7 +45,7 @@ class Principal extends Component {
     this.load();
   }
   load = async () => {
-    await axios.get(urlServer + `/puesto`)
+    await axios.get(urlServer + `/puesto/${this.state.search}`)
         .then(response => {
             this.setState({ puestos: response.data });
         })
@@ -61,6 +57,10 @@ class Principal extends Component {
     return (
       <div style={{ width: "800px"}}>
         <Car/>
+        <InputGroup>
+            <Input  name="search" onChange={this.handleChange}/>
+            <Button onClick={() => this.load()} >  Search </Button>
+        </InputGroup>
         <Table hover responsive>
           <thead>
 
