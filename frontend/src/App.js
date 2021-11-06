@@ -25,6 +25,7 @@ function App(){
               <Route path="/Usuarios">
                 <Usuarios />
               </Route>
+
             </>
           }
           {!isAuthenticated &&
@@ -32,9 +33,11 @@ function App(){
               <Route path="/Principal">
                 <Principal />
               </Route>
+
             </>
           }
           <Redirect to="/" />
+
         </Switch>
       </main>
     </Router>

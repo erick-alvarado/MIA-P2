@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input,Button,FormGroup,Label } from 'reactstrap';
 import axios from 'axios';
-const urlServer = `http://localhost:3001`;
+const urlServer = process.env.REACT_APP_IP_BACKEND;
 
 const parser = require('fast-xml-parser');
 const he = require('he');

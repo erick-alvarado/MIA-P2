@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input,Label,Col,Button,Table } from 'reactstrap';
 import axios from 'axios';
-//const urlServer = `http://localhost:3001`;
 
-const urlServer = `http://localhost:3001`;
+
+const urlServer = process.env.REACT_APP_IP_BACKEND;
+
 
 class Usuarios extends Component {
 

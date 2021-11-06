@@ -2,8 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {CarouselCaption,CarouselItem,CarouselControl,CarouselIndicators,Carousel, Container,Col,Row,Badge} from 'reactstrap'
 var items = [];
-
-const urlServer = `http://localhost:3001`;
+const urlServer = process.env.REACT_APP_IP_BACKEND;
 class Car extends React.Component {
 	constructor(props) {
 		super(props);
@@ -91,15 +90,15 @@ class Car extends React.Component {
                     <Container>
                     <Row>
                         <Col className="bg-light border">
-                            Calificacion :<Badge pill color="warning"> {item.estrellas} </Badge> 
+                            Calificacion :<Badge key = {"c"+item.key} pill color="warning"> {item.estrellas} </Badge> 
                         </Col>
                         <Col className="bg-light border">
-                            Votos : <Badge pill color="info"> {item.votos} </Badge>
+                            Votos : <Badge key = {"vt"+item.key} pill color="info"> {item.votos} </Badge>
                         </Col>
                         <Col className="bg-light border">
                             {item.categorias.map(c=>{
                                 return(
-                                    <Badge pill > {c.categoria} </Badge>
+                                    <Badge pill key = {"cat"+item.key+c.categoria}> {c.categoria} </Badge>
                                 )})
                             }
                         </Col>
