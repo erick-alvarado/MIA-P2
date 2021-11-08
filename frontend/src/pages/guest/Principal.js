@@ -96,7 +96,7 @@ class Principal extends Component {
                       <ModalHeader toggle={toggle}> Formulario</ModalHeader>
                       <ModalBody> 
 
-                        <Registro idpuesto = {v.id_puesto}/>
+                        <Registro idpuesto = {v.id_puesto} name = "CV"/>
 
                       </ModalBody>
                       <ModalFooter>

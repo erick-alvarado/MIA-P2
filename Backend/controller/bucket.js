@@ -6,9 +6,10 @@ const storage = new Storage({
   keyFilename:process.env.GCLOUD_STORAGE_BUCKET,
   projectId: process.env.GCLOUD_PROYECT_ID
 })
-
 const bucket = storage.bucket(process.env.GCLOUD_STORAGE_NAME);
 
+//Random ids generados por tiempo
+const { v1: uuidv1, v4: uuidv4,} = require('uuid');
 
 exports.saveFile = (req, res, next) => {
     if (!req.file) {
@@ -16,7 +17,7 @@ exports.saveFile = (req, res, next) => {
       return;
     }
   
-    const blob = bucket.file(req.file.originalname);
+    const blob = bucket.file(uuidv1()+"."+req.file.originalname.split('.')[1]);
     const blobStream = blob.createWriteStream({
       resumable: false,
     });
