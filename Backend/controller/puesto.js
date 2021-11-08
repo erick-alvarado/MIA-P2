@@ -1,4 +1,7 @@
 const db_ = require('../config/config');
+exports.postularse = async(req,res)=>{
+    console.log(req.body)
+}
 exports.setEstrellas = async(req,res)=>{
     const{id_puesto,estrellas} = req.body;
     sql = `update puesto set calificacion = calificacion +${estrellas} , votos = votos +1 where id_puesto = ${id_puesto}`

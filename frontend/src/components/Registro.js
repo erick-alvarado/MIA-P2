@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Input, Col, FormGroup, Label , Form} from 'reactstrap';
+import { Input, Col, FormGroup, Label , Form,Button} from 'reactstrap';
 import CargarArchivo from './CargarArchivo';
-
+import axios from 'axios';
 class Registro extends Component {
     constructor(props) {
         super(props);
@@ -12,11 +12,13 @@ class Registro extends Component {
                 apellidos:'',
                 correo: '',
                 telefono: 0, 
-                direccion : ''
+                direccion : '',
+                id_puesto: 0
             }
         }
         this.handleChangeForm = this.handleChangeForm.bind(this)
     }
+
     handleChangeForm = async e => {
         await this.setState({
             form: {
@@ -25,6 +27,18 @@ class Registro extends Component {
             }
         });
         console.log(this.state.form);
+    }
+    saveForm = async () => {
+        const data = new FormData() 
+        data.append('file', this.state.file)
+        axios.post(process.env.REACT_APP_IP_BACKEND+"/upload", data, { // receive two parameter endpoint url ,form data 
+        })
+        .then(res => { // then print response status
+            console.log(res.statusText)
+        })
+    }
+    handleCallBack = (data) =>{
+        this.setState({file: data})
     }
 
     render = () => {
@@ -69,9 +83,10 @@ class Registro extends Component {
                 <FormGroup row>
                     <Label sm={3}>CV</Label>
                     <Col sm={8}>
-                        <CargarArchivo data = {this.state.form.dpi}/>
+                        <CargarArchivo data = {this.props.idpuesto} parentCallback = {this.handleCallBack}/>
                     </Col>
                 </FormGroup>
+                <Button color="primary" onClick={this.saveForm} > Do Something </Button>
             </Form>
 
         )

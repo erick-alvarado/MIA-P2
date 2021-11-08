@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mia-p2",
+  "private_key_id": "65cbb794902099771604584e82c2385d1128df9f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+PMuNqzM0NnsM\n8QZkgKPMkOzDxiYKLrCCV2UvTVynK8XaD+hIy9kdAz47bt1wVNuDEUPjduB/CGxQ\nNuI4/+ljM6EQXp4+Md/0f483xiT7Xp6o5rM8FOqSm18xxrT81jw3wGsY8YGNxciE\njgEkBSxTwxabPCdqhwnVG2/nuj7y0JORtb39dt0wOM1otBTNyieicId/efvZcOHF\nqD+glYR/euUflPCdDRGe/NeC9S5oOyZykrgO9FEXbBOa2CtprPsH0niamIZ1Wwra\nV/HzIdC65lJKw4fuNEPxiu9kbWpUMun+d7wkY0aJFUmltYWBNSthMtWli0MAPLjV\n34cgoC0NAgMBAAECggEATcvs7l2RzgttnOhAVf9pfPHTcWhqDAX19weogIShnFfB\nTKDuvD5o5n16CLIY6qQ5NMttuOrXefvG17LqJqc5GXF2r4wSKJsa3BECT6u/WfDi\n722Q5MQk/Zl+f4ukXjV6YM5WvdedxI2ap+Kuwr0+2G5So18hO2ZH9heHVvuKXJ+L\nnyKXdNmp6z8213NhJNe7KedtHRHjrpokzgPCaPF86sJYDKdfUbhhp71KTYnzedqK\nWIqNo+mDsQ0RM0fZZeJhljBRK0nmPGudyCIUzhy4LC/VoQ40rCv9yACjb6RSGzDA\nkjpLtzKVZI0MO/Ojx9VDw7lRMWB07kiJLf6SFXqa/QKBgQD6JmS1no44Qx0muW5F\n/jb0P0qPzL4HHV+Yo2awUA281tlTUPpEbwUKClA7pWW786UK1Ogj7LwYoSOHkSYX\nZC9lwaRQZ0eoovR8ymc9AH73QVULfBdAu4SrrOlkFtg0zcFAXtWZJdYZSg2VDkfi\nTi0eHhpMFWRWtpuDyX0ekNrFhwKBgQDCr7csxMwsGvStt9HLaILqKoJy3+BZ3YKk\nvpE37V+O6w1r8/UjgrYvfMQzm7nxemwijy/HJVUBELYCWo1EsNp67yT72tYNjLE/\nrB/YkJ6HgtUuxCrfLxaLoYnGXoVJ2zL+tkDjt8w9/7m+ud+h2RcqrpeKPBH2lkd0\nDCrHDGDdywKBgQDmUymRjM9YgHs756rgaYTB+fC2XQdvV51o1rM7jkpH4O8z5rC5\nCBv0tbBQayc0Gs+RHJ4uTdCXQO+M6JnRGd8Ga3jWy3HQlVJWAKt0IJvHH/GlZHmo\nkcBDri8riFlErVrN4UP9AjiTCntdDkwj1GV4gLEn8t5zdSnV+1ToKuo0ywKBgFKD\n6U5HRwY2kpgCfiAJdttLEykfLFbKZPHwd1pN+J95jqG/r5nSb+dmqT36dfAcZDKt\nn6F3eDTQYWRT/uYrUx6ht3orwWfSxtlm2cSPXzGuSS7eJBGeQp8B44Q5UaMBDfcZ\nRh1+LEnm1lI5M8jEW2ZSw5Xqae6quTQ9Z/AflfrLAoGBAKfJ+IsD7NzJpx2pgs2X\nq1HOtGXeuATa8nTuJ4oDx/OI1wbdVrfEyuVoqO7UC8Wty9xcuRdti7y0yN91FZae\n06v7dLOVJyydQoMWsitxFc58h1hJYEV39bD0X8e6/TwImGA7xQm3VECgvGJ08gLa\nnpZsefuOjkR4zhchbXTGU4SL\n-----END PRIVATE KEY-----\n",
+  "client_email": "bucketservice@mia-p2.iam.gserviceaccount.com",
+  "client_id": "109278667417899433489",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bucketservice%40mia-p2.iam.gserviceaccount.com",
+  "name": "archivos-files"
+}

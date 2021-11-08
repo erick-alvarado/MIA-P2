@@ -14,8 +14,7 @@ class Principal extends Component {
       puestos: [],
       rate: 0,
       search: '',
-      modal: false,
-      
+      modal: false
     }
     this.handleChange = this.handleChange.bind(this)
 
@@ -55,7 +54,7 @@ class Principal extends Component {
       })
   }
   render = () => {
-    const toggle = () => this.setState({ modal: !this.state.modal });
+    const toggle = (id) => this.setState({ modal: !this.state.modal });
     return (
       <div style={{ width: "800px" }}>
         <Car />
@@ -96,10 +95,12 @@ class Principal extends Component {
                     <Modal isOpen={this.state.modal} toggle={toggle} >
                       <ModalHeader toggle={toggle}> Formulario</ModalHeader>
                       <ModalBody> 
-                        <Registro/>
+
+                        <Registro idpuesto = {v.id_puesto}/>
+
                       </ModalBody>
                       <ModalFooter>
-                        <Button color="primary" > Do Something </Button>
+                        
                         {' '}
                         <Button onClick={toggle}> Cancel </Button>
                       </ModalFooter>
