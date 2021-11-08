@@ -1,8 +1,8 @@
 const {Router} = require("express");
 const router = Router();
-const databaseController = require('../controller/database')
+const bucketController = require('../controller/bucket')
 
-router.post("/",databaseController.cargaMasiva)
+router.post("/",bucketController.saveFile)
 
 
 module.exports = router;

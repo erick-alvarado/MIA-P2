@@ -34,7 +34,7 @@ class Registro extends Component {
         axios.post(process.env.REACT_APP_IP_BACKEND+"/upload", data, { // receive two parameter endpoint url ,form data 
         })
         .then(res => { // then print response status
-            console.log(res.statusText)
+            console.log(res)
         })
     }
     handleCallBack = (data) =>{
