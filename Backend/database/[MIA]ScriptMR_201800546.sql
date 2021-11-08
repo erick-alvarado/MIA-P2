@@ -157,6 +157,8 @@ CREATE TABLE solicitud
     id_solicitud_puesto NUMBER,
     id_solicitud_expediente NUMBER,
     id_solicitud_usuario NUMBER,
+    id_solicitud_usuario_encargado NUMBER,
+
     estado VARCHAR(30) NOT NULL,
 
     CONSTRAINT id_solicitud PRIMARY KEY (id_solicitud),
@@ -173,6 +175,11 @@ CREATE TABLE solicitud
 
     CONSTRAINT id_solicitud_usuario
         FOREIGN KEY (id_solicitud_usuario)
+        REFERENCES usuario(id_usuario)
+        ON DELETE CASCADE,
+        
+    CONSTRAINT id_solicitud_usuario_encargado
+        FOREIGN KEY (id_solicitud_usuario_encargado)
         REFERENCES usuario(id_usuario)
         ON DELETE CASCADE
 

@@ -14,7 +14,8 @@ class Principal extends Component {
       puestos: [],
       rate: 0,
       search: '',
-      modal: false
+      modal: false,
+      idpuesto:0
     }
     this.handleChange = this.handleChange.bind(this)
 
@@ -53,8 +54,11 @@ class Principal extends Component {
         alert(error);
       })
   }
+  show = (id)=>{
+    this.setState({ modal: !this.state.modal,idpuesto : id })
+  }
   render = () => {
-    const toggle = (id) => this.setState({ modal: !this.state.modal });
+    const toggle = () => this.setState({ modal: !this.state.modal });
     return (
       <div style={{ width: "800px" }}>
         <Car />
@@ -76,7 +80,7 @@ class Principal extends Component {
           <tbody>
             {this.state.puestos.map(v => {
               return (
-                <tr key={v.id_puesto}>
+                <tr >
                   <th scope="row">
                     {v.id_puesto}
                   </th>
@@ -87,28 +91,29 @@ class Principal extends Component {
                     {v.salario}
                   </td>
                   <td>
-                    <Rating key={"R" + v.id_puesto} onClick={(e) => { this.setEstrella(e); this.calificarPuesto(v.id_puesto); }} ratingValue={0} /* Rating Props */ />
+                    <Rating  onClick={(e) => { this.setEstrella(e); this.calificarPuesto(v.id_puesto); }} ratingValue={0} /* Rating Props */ />
                   </td>
                   <td>
-                    <Button color="info" onClick={toggle} > Click Me </Button>
+                    <Button color="info" onClick={ () => this.show(v.id_puesto)} > Click Me </Button>
 
-                    <Modal isOpen={this.state.modal} toggle={toggle} >
-                      <ModalHeader toggle={toggle}> Formulario</ModalHeader>
-                      <ModalBody> 
-
-                        <Registro idpuesto = {v.id_puesto} name = "CV"/>
-
-                      </ModalBody>
-                      <ModalFooter>
-                        
-                        {' '}
-                        <Button onClick={toggle}> Cancel </Button>
-                      </ModalFooter>
-                    </Modal>
+                    
                   </td>
                 </tr>
               )
             })}
+            <Modal isOpen={this.state.modal} toggle={toggle} >
+              <ModalHeader toggle={toggle}> Formulario</ModalHeader>
+              <ModalBody>
+
+                <Registro idpuesto={this.state.idpuesto} name="CV" />
+
+              </ModalBody>
+              <ModalFooter>
+
+                {' '}
+                <Button onClick={toggle}> Cancel </Button>
+              </ModalFooter>
+            </Modal>
           </tbody>
         </Table>
       </div>

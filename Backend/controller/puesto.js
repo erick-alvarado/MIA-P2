@@ -4,6 +4,26 @@ exports.postularse = async(req,res)=>{
     sql = `insert into expediente ( dpi, nombres,apellidos,correo,direccion,telefono,url_cv) 
     values ( ${dpi}, '${nombres}' ,'${apellidos}','${correo}','${direccion}',${telefono},'${url}')`
     let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+
+    sql = `
+        WITH empleados AS (
+            select * from usuario u 
+            inner join departamento d on d.id_departamento = u.id_usuario_departamento
+            inner join puesto p on p.id_puesto_departamento = d.id_departamento
+            where p.id_puesto = ${id_puesto} AND
+                u.rol = 'reclutador'
+        ),solicitudes AS (
+            select e.id_usuario, 
+            (select count(*) from solicitud s where s.id_solicitud_usuario_encargado = e.id_usuario) 
+            pendientes from empleados e
+        )
+        select * from solicitudes s order by s.pendientes asc`
+    result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+    var id_revisor_libre = result.rows[0][0]
+    sql = `insert into solicitud (id_solicitud_puesto, id_solicitud_expediente,id_solicitud_usuario_encargado,estado) values (${id_puesto},
+        (select id_expediente from expediente where url_cv = '${url}')
+        ,${id_revisor_libre},'pendiente')`
+    result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
     res.status(200).json({message:'Postulacion realizada!'});
 }
 exports.setEstrellas = async(req,res)=>{
