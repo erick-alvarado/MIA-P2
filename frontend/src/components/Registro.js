@@ -13,7 +13,6 @@ class Registro extends Component {
                 correo: '',
                 telefono: 0, 
                 direccion : '',
-                id_puesto: 0
             }
         }
         this.handleChangeForm = this.handleChangeForm.bind(this)
@@ -26,16 +25,38 @@ class Registro extends Component {
                 [e.target.name]: e.target.value
             }
         });
-        console.log(this.state.form);
     }
     saveForm = async () => {
+        var url=""
         const data = new FormData() 
         data.append('file', this.state.file)
-        axios.post(process.env.REACT_APP_IP_BACKEND+"/upload", data, { // receive two parameter endpoint url ,form data 
+        await axios.post(process.env.REACT_APP_IP_BACKEND+"/upload", data, { // receive two parameter endpoint url ,form data 
         })
         .then(res => { // then print response status
-            console.log(res)
+            url = res.data
         })
+        .catch(error => {
+            alert(error);
+        })
+        if(url!==""){
+            await axios.post(process.env.REACT_APP_IP_BACKEND + `/puesto/postularse`,{
+                id_puesto: this.props.idpuesto,
+                dpi: this.state.form.dpi,
+                nombres: this.state.form.nombres,
+                apellidos: this.state.form.apellidos,
+                correo: this.state.form.correo,
+                telefono: this.state.form.telefono,
+                direccion: this.state.form.direccion,
+                url : url
+            })
+            .then(response => {
+                alert(JSON.stringify(response.data))
+            })
+            .catch(error => {
+                alert(error);
+            })
+        }
+
     }
     handleCallBack = (data) =>{
         this.setState({file: data})
@@ -71,7 +92,7 @@ class Registro extends Component {
                 <FormGroup row>
                     <Label sm={3}>Dirrecion</Label>
                     <Col sm={8}>
-                        <Input type='text' name='correo' value={this.state.form.direccion} onChange={this.handleChangeForm} />
+                        <Input type='text' name='direccion' value={this.state.form.direccion} onChange={this.handleChangeForm} />
                     </Col>
                 </FormGroup>
                 <FormGroup row>

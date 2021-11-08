@@ -1,11 +1,14 @@
 const db_ = require('../config/config');
 exports.postularse = async(req,res)=>{
-    console.log(req.body)
+    const{id_puesto,dpi,nombres,apellidos,correo,telefono,direccion,url} = req.body;
+    sql = `insert into expediente ( dpi, nombres,apellidos,correo,direccion,telefono,url_cv) 
+    values ( ${dpi}, '${nombres}' ,'${apellidos}','${correo}','${direccion}',${telefono},'${url}')`
+    let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+    res.status(200).json({message:'Postulacion realizada!'});
 }
 exports.setEstrellas = async(req,res)=>{
     const{id_puesto,estrellas} = req.body;
     sql = `update puesto set calificacion = calificacion +${estrellas} , votos = votos +1 where id_puesto = ${id_puesto}`
-    console.log(sql)
     let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
     res.status(200).json({message:'Calificacion realizada!'});
 }
@@ -16,7 +19,6 @@ exports.getPuestos = async(req,res)=>{
         p.nombre like '%${req.params.search}%' collate binary_ci OR
         p.nombre like '${req.params.search}%' collate binary_ci OR
         p.nombre like '%${req.params.search}' collate binary_ci`
-        console.log(sql)
     }
     let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
     let puestos =[]
