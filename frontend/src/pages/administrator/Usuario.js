@@ -6,7 +6,7 @@ import axios from 'axios';
 const urlServer = process.env.REACT_APP_IP_BACKEND;
 
 
-class Usuarios extends Component {
+class Usuario extends Component {
 
   constructor(props) {
     super(props);
@@ -202,4 +202,4 @@ class Usuarios extends Component {
   }
 }
 
-export default Usuarios;
+export default Usuario;

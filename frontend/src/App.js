@@ -3,8 +3,9 @@ import NavBar from './components/NavBar';
 import React from 'react';
 import {BrowserRouter as Router, Route,Redirect,Switch} from 'react-router-dom';
 import CargaMasiva from './pages/administrator/CargaMasiva';
-import Usuarios from './pages/administrator/Usuarios';
+import Usuarios from './pages/administrator/Usuario';
 import Principal from './pages/guest/Principal';
+import Expediente from './pages/reclutador/Expediente';
 //npm start
 
 function App(){
@@ -24,6 +25,14 @@ function App(){
               </Route>
               <Route path="/Usuarios">
                 <Usuarios />
+              </Route>
+
+            </>
+          }
+          {isAuthenticated && user.nickname === 'reclutador' &&
+            <>
+              <Route path="/Expediente">
+                <Expediente user = {user.name} />
               </Route>
 
             </>

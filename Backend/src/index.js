@@ -16,6 +16,8 @@ const departamentoRouter = require('../routes/departamento')
 const usuarioRouter = require('../routes/usuario')
 const puestoRouter = require('../routes/puesto')
 const bucketRouter = require('../routes/bucket')
+const expedienteRouter = require('../routes/expediente')
+
 
 
 
@@ -68,6 +70,8 @@ app.use("/database",databaseRouter);
 app.use("/departamento",departamentoRouter);
 app.use("/usuario",usuarioRouter);
 app.use("/puesto",puestoRouter);
+app.use("/expediente",expedienteRouter);
+
 app.use("/upload", multer.single('file'),bucketRouter);
 
 

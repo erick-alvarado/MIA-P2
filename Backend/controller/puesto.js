@@ -11,7 +11,8 @@ exports.postularse = async(req,res)=>{
             inner join departamento d on d.id_departamento = u.id_usuario_departamento
             inner join puesto p on p.id_puesto_departamento = d.id_departamento
             where p.id_puesto = ${id_puesto} AND
-                u.rol = 'reclutador'
+                u.rol = 'reclutador' AND
+                u.estado = 1
         ),solicitudes AS (
             select e.id_usuario, 
             (select count(*) from solicitud s where s.id_solicitud_usuario_encargado = e.id_usuario) 
