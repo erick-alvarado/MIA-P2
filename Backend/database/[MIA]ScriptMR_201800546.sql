@@ -35,7 +35,7 @@ CREATE TABLE departamento
     CONSTRAINT id_departamento_aux
         FOREIGN KEY (id_departamento_aux)
         REFERENCES departamento(id_departamento)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE puesto
     CONSTRAINT id_puesto_departamento
         FOREIGN KEY (id_puesto_departamento)
         REFERENCES departamento(id_departamento)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -70,13 +70,11 @@ CREATE TABLE detalle_categoria
     CONSTRAINT id_detalle_categoria_categoria
         FOREIGN KEY (id_detalle_categoria_categoria)
         REFERENCES categoria(id_categoria)
-        ON DELETE CASCADE,
+        ,
 
     CONSTRAINT id_detalle_categoria_puesto
         FOREIGN KEY (id_detalle_categoria_puesto)
         REFERENCES puesto(id_puesto)
-        ON DELETE CASCADE
-
 );
 
 CREATE TABLE requisito 
@@ -92,7 +90,7 @@ CREATE TABLE requisito
     CONSTRAINT id_requisito_puesto
         FOREIGN KEY (id_requisito_puesto)
         REFERENCES puesto(id_puesto)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -107,12 +105,12 @@ CREATE TABLE detalle_formato
     CONSTRAINT id_detalle_formato_requisito
         FOREIGN KEY (id_detalle_formato_requisito)
         REFERENCES requisito(id_requisito)
-        ON DELETE CASCADE,
+        ,
 
     CONSTRAINT id_detalle_formato_formato
         FOREIGN KEY (id_detalle_formato_formato)
         REFERENCES formato(id_formato)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -132,7 +130,7 @@ CREATE TABLE usuario
     CONSTRAINT id_usuario_departamento
         FOREIGN KEY (id_usuario_departamento)
         REFERENCES departamento(id_departamento)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -166,22 +164,22 @@ CREATE TABLE solicitud
     CONSTRAINT id_solicitud_puesto
         FOREIGN KEY (id_solicitud_puesto)
         REFERENCES puesto(id_puesto)
-        ON DELETE CASCADE,
+        ,
 
     CONSTRAINT id_solicitud_expediente
         FOREIGN KEY (id_solicitud_expediente)
         REFERENCES expediente(id_expediente)
-        ON DELETE CASCADE,
+        ,
 
     CONSTRAINT id_solicitud_usuario
         FOREIGN KEY (id_solicitud_usuario)
         REFERENCES usuario(id_usuario)
-        ON DELETE CASCADE,
+        ,
         
     CONSTRAINT id_solicitud_usuario_encargado
         FOREIGN KEY (id_solicitud_usuario_encargado)
         REFERENCES usuario(id_usuario)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -199,12 +197,12 @@ CREATE TABLE detalle_requisito
     CONSTRAINT id_detalle_requisito_requisito
         FOREIGN KEY (id_detalle_requisito_requisito)
         REFERENCES requisito(id_requisito)
-        ON DELETE CASCADE,
+        ,
 
     CONSTRAINT id_detalle_requisito_solicitud
         FOREIGN KEY (id_detalle_requisito_solicitud)
         REFERENCES solicitud(id_solicitud)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -219,12 +217,12 @@ CREATE TABLE chat
     CONSTRAINT id_chat_usuario1
         FOREIGN KEY (id_chat_usuario1)
         REFERENCES usuario(id_usuario)
-        ON DELETE CASCADE,
+        ,
         
     CONSTRAINT id_chat_usuario2
         FOREIGN KEY (id_chat_usuario2)
         REFERENCES usuario(id_usuario)
-        ON DELETE CASCADE
+        
 
 );
 
@@ -240,11 +238,11 @@ CREATE TABLE mensaje
     CONSTRAINT id_mensaje_usuario
         FOREIGN KEY (id_mensaje_usuario)
         REFERENCES usuario(id_usuario)
-        ON DELETE CASCADE,
+        ,
         
     CONSTRAINT id_mensaje_chat
         FOREIGN KEY (id_mensaje_chat)
         REFERENCES chat(id_chat)
-        ON DELETE CASCADE
+        
 
 );

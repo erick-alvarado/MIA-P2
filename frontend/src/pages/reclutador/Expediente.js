@@ -36,6 +36,35 @@ class Expediente extends Component {
   show = (url)=>{
     this.setState({ modal: !this.state.modal,url : url })
   }
+  recluit = async (id,dpi,id_puesto,email) => {
+    await axios.post(urlServer + `/expediente/reclutar`,
+      {
+        id: id,
+        dpi: dpi,
+        id_puesto: id_puesto,
+        email : email
+      })
+      .then(response => {
+        this.load();
+        alert(JSON.stringify(response.data))
+      })
+      .catch(error => {
+        alert(error);
+      })
+  }
+  recluit = async (id) => {
+    await axios.post(urlServer + `/expediente/rechazar`,
+      {
+        id_expediente: id
+      })
+      .then(response => {
+        this.load();
+        alert(JSON.stringify(response.data))
+      })
+      .catch(error => {
+        alert(error);
+      })
+  }
   render = () => {
     const toggle = () => this.setState({ modal: !this.state.modal });
     return (
@@ -52,6 +81,8 @@ class Expediente extends Component {
             <th>Direccion</th>
             <th>Telefono</th>
             <th>CV</th>
+            <th>Control</th>
+
           </tr>
           </thead>
           <tbody>
@@ -82,12 +113,17 @@ class Expediente extends Component {
                     <td>
                       <Button outline color='info' onClick={() => this.show(v.url)}>Ver</Button>
                     </td>
+                    <td>
+                      <Button outline color='success' onClick={() => this.recluit(v.id,v.dpi,v.id_puesto,v.correo)}>Aceptar</Button>
+                      <Button outline color='danger' onClick={() => this.recluit(v.id)}>Rechazar</Button>
+
+                    </td>
                   </tr>
                 )
               })}
           </tbody>
         </Table>
-        <Modal isOpen={this.state.modal} toggle={toggle} >
+        <Modal isOpen={this.state.modal} toggle={toggle} fullscreen >
               <ModalHeader toggle={toggle}> CV</ModalHeader>
               <ModalBody>
                     <embed src={this.state.url} width="100%" height="100%" />
