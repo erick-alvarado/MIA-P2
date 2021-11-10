@@ -3,6 +3,7 @@ const db_ = require('../config/config');
 exports.getUsuarios = async(req,res)=>{
     sql = `select u.id_usuario,p.nombre,u.usuario,u.contrasena,u.fecha_inicio,u.fecha_fin,u.rol from usuario u
     inner join departamento p ON p.id_departamento = u.id_usuario_departamento
+    left join solicitud s ON s.id_solicitud_usuario = u.id_usuario
     where u.estado = 1`
     if(req.params.id){
         sql+= ` and p.id_departamento =  (select us.id_usuario_departamento from usuario us where us.usuario = '${req.params.id}')    `
@@ -10,7 +11,7 @@ exports.getUsuarios = async(req,res)=>{
             sql+= ` and u.rol = 'reclutador'`
         }
         else{
-            sql+= ` and u.rol = 'usuario'`
+            sql+= ` and u.rol = 'usuario'  and s.estado = 'activo'`
         }
     }
     else{

@@ -36,7 +36,6 @@ exports.recluit = async(req,res)=>{
 
     sql = `update solicitud s set s.estado = 'activo' ,s.id_solicitud_usuario = (select u.id_usuario from usuario u where u.usuario = '${dpi}')
     where s.id_solicitud_expediente = ${id}`
-    console.log(sql)
     result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
 
     await mail.Send(email,`Ahora posee acceso al sistema. Sus credenciales son:\n Usuario:${dpi} \n Contraseña: 123`)
