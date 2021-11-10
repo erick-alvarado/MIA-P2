@@ -1,4 +1,5 @@
 const db_ = require('../config/config');
+const mail = require('../mail/mail')
 
 exports.getUsuarios = async(req,res)=>{
     sql = `select u.id_usuario,p.nombre,u.usuario,u.contrasena,u.fecha_inicio,u.fecha_fin,u.rol from usuario u
@@ -8,7 +9,7 @@ exports.getUsuarios = async(req,res)=>{
     if(req.params.id){
         sql+= ` and p.id_departamento =  (select us.id_usuario_departamento from usuario us where us.usuario = '${req.params.id}')    `
         if(req.params.type==='personal'){
-            sql+= ` and u.rol = 'reclutador'`
+            sql+= ` and s.estado = 'asociado'`
         }
         else{
             sql+= ` and u.rol = 'usuario'  and s.estado = 'activo'`
@@ -17,7 +18,6 @@ exports.getUsuarios = async(req,res)=>{
     else{
         sql+=` and (u.rol = 'coordinador' OR u.rol = 'reclutador')`
     }
-    console.log(sql)
     let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
     let users =[]
     users = result.rows.map(user=> {
@@ -46,7 +46,7 @@ exports.postUsuario = async(req,res)=>{
 }
 exports.deleteUsuario = async(req,res)=>{
     const{id_usuario} = req.body;
-    sql = `update usuario set estado= 0 where id_usuario = ${id_usuario}`
+    sql = `update usuario set estado= 0, fecha_fin = CURRENT_TIMESTAMP where id_usuario = ${id_usuario}`
     console.log(sql)
     let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
     res.status(200).json({message:'Usuario eliminado'});
@@ -63,4 +63,21 @@ exports.updateUsuario = async(req,res)=>{
     console.log(sql)
     let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
     res.status(200).json({message:'Usuario modificado'});
+}
+exports.asociarUsuario = async(req,res)=>{
+    const{id_usuario,usuario} = req.body;
+
+    sql = `update solicitud set 
+            estado = 'asociado'
+        where id_solicitud_usuario = ${id_usuario}`
+    let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+
+    sql = `select e.correo from expediente e where e.dpi = ${usuario}`
+    console.log(sql)
+    result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+    console.log(result)
+    let email = result.rows[0][0]
+    await mail.Send(email,`Usted ha sido asociado a la empresa, por favor presentarse el dia de mañana a las oficinas`)
+
+    res.status(200).json({message:'Usuario asociado'});
 }

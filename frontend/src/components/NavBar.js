@@ -28,7 +28,11 @@ const NavBar = () => {
                     {isAuthenticated && user.nickname === 'coordinador' && 
                         <Nav className="me-auto" navbar>
                             <NavLink href="/Planilla"> Planilla </NavLink> 
+                            <NavLink href="/Usuarios"> Usuarios </NavLink> 
+
                         </Nav>
+                        
+                        
                     }
                     {!isAuthenticated &&
                         <Nav className="me-auto" navbar>

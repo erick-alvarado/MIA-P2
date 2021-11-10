@@ -7,6 +7,7 @@ import Usuarios from './pages/administrator/Usuario';
 import Principal from './pages/guest/Principal';
 import Expediente from './pages/reclutador/Expediente';
 import Planilla from './pages/coordinador/Planilla';
+import UsuarioD from './pages/coordinador/Usuario';
 //npm start
 
 function App(){
@@ -34,6 +35,9 @@ function App(){
             <>
               <Route path="/Planilla">
                 <Planilla user = {user.name} />
+              </Route>
+              <Route path="/Usuarios">
+                <UsuarioD user = {user.name} />
               </Route>
 
             </>
