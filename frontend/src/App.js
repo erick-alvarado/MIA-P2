@@ -6,6 +6,7 @@ import CargaMasiva from './pages/administrator/CargaMasiva';
 import Usuarios from './pages/administrator/Usuario';
 import Principal from './pages/guest/Principal';
 import Expediente from './pages/reclutador/Expediente';
+import Planilla from './pages/coordinador/Planilla';
 //npm start
 
 function App(){
@@ -25,6 +26,14 @@ function App(){
               </Route>
               <Route path="/Usuarios">
                 <Usuarios />
+              </Route>
+
+            </>
+          }
+          {isAuthenticated && user.nickname === 'coordinador' &&
+            <>
+              <Route path="/Planilla">
+                <Planilla user = {user.name} />
               </Route>
 
             </>

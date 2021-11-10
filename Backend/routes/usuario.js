@@ -6,6 +6,9 @@ router.post("/",usuarioController.postUsuario)
 router.post("/delete",usuarioController.deleteUsuario)
 router.post("/update",usuarioController.updateUsuario)
 router.get("/",usuarioController.getUsuarios)
+router.get("/:id/:type",usuarioController.getUsuarios)
+
+
 
 
 module.exports = router;

@@ -107,7 +107,7 @@ class Registro extends Component {
                         <CargarArchivo data = {this.props.idpuesto} parentCallback = {this.handleCallBack}/>
                     </Col>
                 </FormGroup>
-                <Button color="primary" onClick={this.saveForm} > Do Something </Button>
+                <Button color="primary" onClick={this.saveForm} > Enviar </Button>
             </Form>
 
         )

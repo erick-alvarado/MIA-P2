@@ -94,7 +94,7 @@ class Principal extends Component {
                     <Rating  onClick={(e) => { this.setEstrella(e); this.calificarPuesto(v.id_puesto); }} ratingValue={0} /* Rating Props */ />
                   </td>
                   <td>
-                    <Button color="info" onClick={ () => this.show(v.id_puesto)} > Click Me </Button>
+                    <Button color="info" onClick={ () => this.show(v.id_puesto)} > Postularme </Button>
 
                     
                   </td>

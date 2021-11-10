@@ -25,6 +25,11 @@ const NavBar = () => {
                             <NavLink href="/Expediente"> Expendientes </NavLink> 
                         </Nav>
                     }
+                    {isAuthenticated && user.nickname === 'coordinador' && 
+                        <Nav className="me-auto" navbar>
+                            <NavLink href="/Planilla"> Planilla </NavLink> 
+                        </Nav>
+                    }
                     {!isAuthenticated &&
                         <Nav className="me-auto" navbar>
                             <NavLink href="/Principal">Principal </NavLink> 

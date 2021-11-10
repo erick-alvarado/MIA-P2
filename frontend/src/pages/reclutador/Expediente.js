@@ -52,7 +52,7 @@ class Expediente extends Component {
         alert(error);
       })
   }
-  recluit = async (id) => {
+  decline = async (id) => {
     await axios.post(urlServer + `/expediente/rechazar`,
       {
         id_expediente: id
@@ -115,7 +115,7 @@ class Expediente extends Component {
                     </td>
                     <td>
                       <Button outline color='success' onClick={() => this.recluit(v.id,v.dpi,v.id_puesto,v.correo)}>Aceptar</Button>
-                      <Button outline color='danger' onClick={() => this.recluit(v.id)}>Rechazar</Button>
+                      <Button outline color='danger' onClick={() => this.decline(v.id)}>Rechazar</Button>
 
                     </td>
                   </tr>

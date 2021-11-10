@@ -4,6 +4,19 @@ exports.getUsuarios = async(req,res)=>{
     sql = `select u.id_usuario,p.nombre,u.usuario,u.contrasena,u.fecha_inicio,u.fecha_fin,u.rol from usuario u
     inner join departamento p ON p.id_departamento = u.id_usuario_departamento
     where u.estado = 1`
+    if(req.params.id){
+        sql+= ` and p.id_departamento =  (select us.id_usuario_departamento from usuario us where us.usuario = '${req.params.id}')    `
+        if(req.params.type==='personal'){
+            sql+= ` and u.rol = 'reclutador'`
+        }
+        else{
+            sql+= ` and u.rol = 'usuario'`
+        }
+    }
+    else{
+        sql+=` and (u.rol = 'coordinador' OR u.rol = 'reclutador')`
+    }
+    console.log(sql)
     let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
     let users =[]
     users = result.rows.map(user=> {
