@@ -8,6 +8,7 @@ import Principal from './pages/guest/Principal';
 import Expediente from './pages/reclutador/Expediente';
 import Planilla from './pages/coordinador/Planilla';
 import UsuarioD from './pages/coordinador/Usuario';
+import Aplicante from './pages/reclutador/Aplicante';
 //npm start
 
 function App(){
@@ -47,7 +48,9 @@ function App(){
               <Route path="/Expediente">
                 <Expediente user = {user.name} />
               </Route>
-
+              <Route path="/Aplicantes">
+                <Aplicante user = {user.name} />
+              </Route>
             </>
           }
           {!isAuthenticated &&

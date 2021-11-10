@@ -22,7 +22,9 @@ const NavBar = () => {
                     }
                     {isAuthenticated && user.nickname === 'reclutador' && 
                         <Nav className="me-auto" navbar>
-                            <NavLink href="/Expediente"> Expendientes </NavLink> 
+                            <NavLink href="/Expediente"> Postulaciones </NavLink> 
+                            <NavLink href="/Aplicantes"> Aplicantes </NavLink> 
+
                         </Nav>
                     }
                     {isAuthenticated && user.nickname === 'coordinador' && 

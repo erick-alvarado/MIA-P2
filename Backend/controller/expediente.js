@@ -4,8 +4,14 @@ exports.getExps = async(req,res)=>{
     sql = `select e.id_expediente,e.dpi,e.nombres,e.apellidos,e.correo,e.direccion,e.telefono,e.url_cv,s.id_solicitud_puesto
     from solicitud s 
     inner join expediente e on e.id_expediente = s.id_solicitud_expediente
-    where s.id_solicitud_usuario_encargado = (select id_usuario from usuario us where us.usuario = '${req.params.id_revisor}')
-            and s.estado = 'pendiente'`
+    where s.id_solicitud_usuario_encargado = (select id_usuario from usuario us where us.usuario = '${req.params.id_revisor}')`
+    if(req.params.aplicantes){
+        sql+=` and s.estado = 'registrado'`
+    }
+    else{
+        sql+= ` and s.estado = 'pendiente'`
+    }
+            
     let result = await db_.Open(sql,[],false).catch((e) => { console.error(e); return 'error!'})
     let exps =[]
     exps = result.rows.map(exp=> {
@@ -27,19 +33,23 @@ exports.getExps = async(req,res)=>{
 
 exports.recluit = async(req,res)=>{
     const{id,dpi,id_puesto,email} = req.body
-    
-    
     let sql  = `insert into usuario ( id_usuario_departamento, usuario, contrasena, fecha_inicio, rol,estado) values (
         (select p.id_puesto_departamento from puesto p where p.id_puesto = ${id_puesto})
         ,'${dpi}','123',CURRENT_TIMESTAMP,'usuario',1)`
     let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
 
-    sql = `update solicitud s set s.estado = 'activo' ,s.id_solicitud_usuario = (select u.id_usuario from usuario u where u.usuario = '${dpi}')
+    sql = `update solicitud s set s.estado = 'registrado' ,s.id_solicitud_usuario = (select u.id_usuario from usuario u where u.usuario = '${dpi}')
     where s.id_solicitud_expediente = ${id}`
     result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
 
     await mail.Send(email,`Ahora posee acceso al sistema. Sus credenciales son:\n Usuario:${dpi} \n Contraseña: 123`)
     res.status(200).json({message: 'Se registro al usuario!'});
+}
+exports.accept = async(req,res)=>{
+    const{id} = req.body
+    sql = `update solicitud s set s.estado = 'activo' where s.id_solicitud_expediente = ${id}`
+    result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+    res.status(200).json({message: 'Se autorizo al usuario!'});
 }
 
 exports.decline = async(req,res)=>{
@@ -48,5 +58,10 @@ exports.decline = async(req,res)=>{
     let result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
     sql =    `delete from expediente where id_expediente = ${id_expediente}`
     result = await db_.Open(sql,[],true).catch((e) => { console.error(e); return 'error!'})
+    res.status(200).json({message: 'Expediente rechazado!'});
+}
+exports.declineExp = async(req,res)=>{
+    const{email} = req.body
+    await mail.Send(email,`El ultimo expediente que registro al sistema ha sido rechazado, debe ingresar nuevamente los documentos.`)
     res.status(200).json({message: 'Expediente rechazado!'});
 }
